@@ -1,0 +1,10 @@
+../Core/Src/demo_polling.c:183:13:demoNotif	7
+../Core/Src/demo_polling.c:233:6:demoIni	3
+../Core/Src/demo_polling.c:336:6:demoCycle	29
+../Core/Src/demo_polling.c:517:13:demoCE	7
+../Core/Src/demo_polling.c:567:13:demoNfcf	3
+../Core/Src/demo_polling.c:607:13:demoNfcv	3
+../Core/Src/demo_polling.c:662:13:demoT2t	3
+../Core/Src/demo_polling.c:689:6:demoP2P	5
+../Core/Src/demo_polling.c:744:6:demoAPDU	10
+../Core/Src/demo_polling.c:796:12:demoTransceiveBlocking	3

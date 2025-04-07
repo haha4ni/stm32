@@ -1,0 +1,10 @@
+../Core/Src/demo_polling.c:183:13:demoNotif	24	static
+../Core/Src/demo_polling.c:233:6:demoIni	24	static
+../Core/Src/demo_polling.c:336:6:demoCycle	32	static
+../Core/Src/demo_polling.c:517:13:demoCE	200	static
+../Core/Src/demo_polling.c:567:13:demoNfcf	128	static
+../Core/Src/demo_polling.c:607:13:demoNfcv	56	static
+../Core/Src/demo_polling.c:662:13:demoT2t	40	static
+../Core/Src/demo_polling.c:689:6:demoP2P	40	static
+../Core/Src/demo_polling.c:744:6:demoAPDU	40	static
+../Core/Src/demo_polling.c:796:12:demoTransceiveBlocking	40	static
