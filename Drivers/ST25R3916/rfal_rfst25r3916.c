@@ -488,6 +488,7 @@ static uint8_t  rfalFIFOGetNumIncompleteBits( void );
 /*******************************************************************************/
 ReturnCode rfalInitialize( void )
 {
+    platformLog("rfalInitialize()\r\n");
     ReturnCode err;
     
     RFAL_EXIT_ON_ERR( err, st25r3916Initialize() );

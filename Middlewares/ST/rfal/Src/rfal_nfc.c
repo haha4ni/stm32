@@ -137,6 +137,7 @@ static ReturnCode rfalNfcListenActivation( void );
 /*******************************************************************************/
 ReturnCode rfalNfcInitialize( void )
 {
+    platformLog("rfalNfcInitialize()\r\n");
     ReturnCode err;
     
     gNfcDev.state = RFAL_NFC_STATE_NOTINIT;

@@ -218,6 +218,7 @@ void st25r3916DisableInterrupts(uint32_t mask)
 /*******************************************************************************/
 void st25r3916ClearInterrupts( void )
 {
+    platformLog("st25r3916ClearInterrupts()\r\n");
     uint8_t iregs[ST25R3916_INT_REGS_LEN];
 
     st25r3916ReadMultipleRegisters(ST25R3916_REG_IRQ_MAIN, iregs, ST25R3916_INT_REGS_LEN);

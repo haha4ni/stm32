@@ -1,9 +1,0 @@
-../Core/Src/demo_ce.c:173:13:cmdCompare	3
-../Core/Src/demo_ce.c:195:17:demoCeT4TSelect	9
-../Core/Src/demo_ce.c:252:17:demoCeT4TRead	6
-../Core/Src/demo_ce.c:307:17:demoCeT4TUpdate	3
-../Core/Src/demo_ce.c:344:17:demoCeT3TCheck	13
-../Core/Src/demo_ce.c:461:17:demoCeT3TUpdate	11
-../Core/Src/demo_ce.c:566:6:demoCeInit	3
-../Core/Src/demo_ce.c:601:10:demoCeT4T	8
-../Core/Src/demo_ce.c:650:10:demoCeT3T	5

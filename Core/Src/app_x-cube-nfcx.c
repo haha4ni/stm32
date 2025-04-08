@@ -97,27 +97,27 @@ void MX_NFC6_PollingDemo_Init(void)
   platformLog("Welcome to X-NUCLEO-NFC08A1\r\n");
 #endif /* ST25R3916 */
   /* Initalize RFAL */
-//  if( !demoIni() )
-//  {
-//    /*
-//    * in case the rfal initalization failed signal it by flashing all LED
-//    * and stoping all operations
-//    */
-//    platformLog("Initialization failed..\r\n");
-//    while(1)
-//    {
-//      platformDelay(100);
-//    }
-//  }
-//  else
-//  {
-//    platformLog("Initialization succeeded..\r\n");
-//    for (int i = 0; i < 6; i++)
-//    {
-//      platformDelay(200);
-//    }
-//    platformLog("Initialization succeeded GO..\r\n");
-//  }
+	if (!demoIni() )
+  {
+    /*
+    * in case the rfal initalization failed signal it by flashing all LED
+    * and stoping all operations
+    */
+    platformLog("Initialization failed..\r\n");
+    while(1)
+    {
+      platformDelay(100);
+    }
+  }
+  else
+  {
+    platformLog("Initialization succeeded..\r\n");
+    for (int i = 0; i < 6; i++)
+    {
+      platformDelay(200);
+    }
+    platformLog("Initialization succeeded GO..\r\n");
+  }
 }
 
 /**

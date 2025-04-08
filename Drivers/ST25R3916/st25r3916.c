@@ -103,6 +103,7 @@ ReturnCode st25r3916Initialize( void )
     
 #ifndef RFAL_USE_I2C
     /* Ensure a defined chip select state */
+    platformLog("platformSpiDeselect()\r\n");
     platformSpiDeselect();
 #endif /* RFAL_USE_I2C */
 
@@ -116,6 +117,7 @@ ReturnCode st25r3916Initialize( void )
 
     if( !st25r3916CheckChipID( NULL ) )
     {
+        platformLog("!st25r3916CheckChipID( NULL )\r\n");
         platformErrorHandle();
         return RFAL_ERR_HW_MISMATCH;
     }
@@ -652,10 +654,11 @@ ReturnCode st25r3916SetStartGPTimer( uint16_t gpt_8fcs, uint8_t trigger_source )
 bool st25r3916CheckChipID( uint8_t *rev )
 {
     uint8_t ID;
-    
+    platformLog("@@st25r3916CheckChipID()\r\n");
     ID = 0;
     st25r3916ReadRegister( ST25R3916_REG_IC_IDENTITY, &ID );
-    
+    platformLog("@@ID = %d\r\n", ID);
+    platformLog("@@*rev = %d\r\n", *rev);
     /* Check if IC Identity Register contains ST25R3916's IC type code */
 #if defined(ST25R3916)
     if( (ID & ST25R3916_REG_IC_IDENTITY_ic_type_mask) != ST25R3916_REG_IC_IDENTITY_ic_type_st25r3916 )
@@ -669,13 +672,12 @@ bool st25r3916CheckChipID( uint8_t *rev )
         return false;
     }
 #endif /* ST25R3916 */
-    
-        
+
     if(rev != NULL)
     {
         *rev = (ID & ST25R3916_REG_IC_IDENTITY_ic_rev_mask);
     }
-    
+
     return true;
 }
 

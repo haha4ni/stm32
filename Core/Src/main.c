@@ -28,7 +28,7 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-
+#include "rfal_platform.h"
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -62,11 +62,13 @@ static void MX_SPI1_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 void SPI1_Transmit(uint8_t* data, uint16_t size) {
+  platformSpiSelect();
     // Transmit data via SPI1 using the HAL_SPI_Transmit function
     if (HAL_SPI_Transmit(&hspi1, data, size, HAL_MAX_DELAY) != HAL_OK) {
         // Transmission failed
         Error_Handler();
     }
+    platformSpiDeselect();
 }
 /* USER CODE END 0 */
 
@@ -103,14 +105,15 @@ int main(void)
   MX_SPI1_Init();
   MX_USB_DEVICE_Init();
   /* USER CODE BEGIN 2 */
+  platformSpiDeselect();
   HAL_Delay(700);
   // Example data to send
-  uint8_t spiData[] = {0xAA, 0xBB, 0xCC};
+  uint8_t spiData[] = {0x7f, 0x00};
 
   // Send data over SPI
   SPI1_Transmit(spiData, sizeof(spiData));
-
-
+  SPI1_Transmit(spiData, sizeof(spiData));
+  SPI1_Transmit(spiData, sizeof(spiData));
 	MX_X_CUBE_NFC6_Init();
   /* USER CODE END 2 */
 
@@ -121,19 +124,15 @@ int main(void)
 	/* Toggle the state of LD5_Pin */
 	HAL_GPIO_TogglePin(GPIOD, LD5_Pin);
 
+	HAL_Delay(500);
+//	HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_4);
 
-
-//	ST25R3916_ReadID();
-//	uint8_t UserTxBuffera[] = "pass ST25R3916_ReadID \r\n";
-//
-//	usb_printf("%s\r\n",UserTxBuffera);
-//
 //	uint8_t UserTxBuffer[] = "STM32 Virtual COM Port Driver \r\n";
 //
 //
 //	usb_printf("%s\r\n",UserTxBuffer);
 	/* Delay for 1 second (1000 milliseconds) */
-	HAL_Delay(1000);
+	HAL_Delay(500);
 
     /* USER CODE END WHILE */
 
@@ -243,7 +242,7 @@ static void MX_SPI1_Init(void)
   hspi1.Init.DataSize = SPI_DATASIZE_8BIT;
   hspi1.Init.CLKPolarity = SPI_POLARITY_LOW;
   hspi1.Init.CLKPhase = SPI_PHASE_2EDGE;
-  hspi1.Init.NSS = SPI_NSS_HARD_OUTPUT;
+  hspi1.Init.NSS = SPI_NSS_SOFT;
   hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_32;
   hspi1.Init.FirstBit = SPI_FIRSTBIT_MSB;
   hspi1.Init.TIMode = SPI_TIMODE_DISABLE;
@@ -286,6 +285,9 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(OTG_FS_PowerSwitchOn_GPIO_Port, OTG_FS_PowerSwitchOn_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOD, LD4_Pin|LD3_Pin|LD5_Pin|LD6_Pin
                           |Audio_RST_Pin, GPIO_PIN_RESET);
 
@@ -310,6 +312,13 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   GPIO_InitStruct.Alternate = GPIO_AF5_SPI2;
   HAL_GPIO_Init(PDM_OUT_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PA4 */
+  GPIO_InitStruct.Pin = GPIO_PIN_4;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pin : PB0 */
   GPIO_InitStruct.Pin = GPIO_PIN_0;

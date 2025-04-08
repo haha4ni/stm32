@@ -233,10 +233,11 @@ static void demoNotif( rfalNfcState st )
 bool demoIni( void )
 {
     ReturnCode err;
-
+    platformLog("demoIni()\r\n");
     err = rfalNfcInitialize();
     if( err == RFAL_ERR_NONE )
     {
+    	platformLog("err == RFAL_ERR_NONE\r\n");
         rfalNfcDefaultDiscParams( &discParam );
 
         discParam.devLimit      = 1U;
@@ -322,6 +323,7 @@ bool demoIni( void )
         state = DEMO_ST_START_DISCOVERY;
         return true;
     }
+    platformLog("err != RFAL_ERR_NONE\r\n");
     return false;
 }
 
